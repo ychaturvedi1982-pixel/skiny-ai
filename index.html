@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Skiny AI — a fast, thoughtful AI chat, designed for your phone.">
+  <title>Skiny AI</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button menu-button" id="menuButton" aria-label="Open chat history" title="Chat history">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      </button>
+      <button class="brand-button" id="brandButton" aria-label="Skiny AI settings">Skiny AI <span class="chevron">⌄</span></button>
+      <button class="icon-button settings-button" id="settingsButton" aria-label="Settings" title="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.7 2.94-.08-.02a1.7 1.7 0 0 0-1.79.49l-.05.07h-3.4l-.03-.08a1.7 1.7 0 0 0-1.43-1.12 1.7 1.7 0 0 0-1.2.35l-.07.05-2.94-1.7.02-.08a1.7 1.7 0 0 0-.49-1.79l-.07-.05v-3.4l.08-.03a1.7 1.7 0 0 0 .77-2.63l-.05-.07 1.7-2.94.08.02a1.7 1.7 0 0 0 1.79-.49l.05-.07h3.4l.03.08a1.7 1.7 0 0 0 2.63.77l.07-.05 2.94 1.7-.02.08a1.7 1.7 0 0 0 .49 1.79l.07.05v3.4z"/></svg>
+      </button>
+    </header>
+
+    <main class="main" id="main">
+      <section class="welcome" id="welcome" aria-label="Start a conversation">
+        <div class="welcome-mark" aria-hidden="true">
+          <svg viewBox="0 0 80 80"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M40 8c9 5 15 13 15 23s-6 18-15 23c-9-5-15-13-15-23S31 13 40 8Z"/><path d="M18 18c10-2 20 1 26 8s8 17 4 27c-10 2-20-1-26-8s-8-17-4-27Z"/><path d="M62 18c4 10 2 20-4 27s-16 10-26 8c-4-10-2-20 4-27s16-10 26-8Z"/><path d="M9 39c5-9 13-15 23-15s18 6 23 15c-5 9-13 15-23 15S14 48 9 39Z"/><path d="M18 60c-2-10 1-20 8-26s17-8 27-4c2 10-1 20-8 26s-17 8-27 4Z"/><path d="M62 60c-10 4-20 2-27-4s-10-16-8-26c10-4 20-2 27 4s10 16 8 26Z"/></g><circle cx="40" cy="39" r="2.6" fill="currentColor"/></svg>
+        </div>
+        <h1>What can I help with?</h1>
+        <p>Your ideas, questions, and big plans start here.</p>
+        <div class="suggestions">
+          <button class="suggestion" data-prompt="Help me understand a complicated topic in simple terms."><span>✦</span> Explain something</button>
+          <button class="suggestion" data-prompt="Help me brainstorm some creative ideas."><span>◉</span> Brainstorm ideas</button>
+          <button class="suggestion" data-prompt="Help me write a clear, polished message."><span>↗</span> Write something</button>
+        </div>
+      </section>
+      <section class="conversation" id="conversation" aria-live="polite" aria-label="Conversation"></section>
+    </main>
+
+    <footer class="composer-area">
+      <form class="composer" id="chatForm">
+        <textarea id="messageInput" rows="1" placeholder="Ask anything..." aria-label="Message Skiny AI"></textarea>
+        <div class="composer-actions">
+          <button class="icon-button attach-button" id="attachButton" type="button" aria-label="Add an attachment" title="Add a file (coming soon)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <span class="composer-spacer"></span>
+          <button class="icon-button mic-button" id="micButton" type="button" aria-label="Voice input" title="Voice input"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3m-4 0h8"/></svg></button>
+          <button class="send-button" id="sendButton" type="submit" aria-label="Send message" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-7 7 7-7 7 7"/></svg></button>
+        </div>
+      </form>
+      <p class="disclaimer">Skiny AI can make mistakes. Check important information.</p>
+    </footer>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="drawer" aria-label="Chat history" aria-hidden="true">
+    <div class="drawer-header"><span class="drawer-title">Your chats</span><button class="icon-button" id="closeDrawer" aria-label="Close chat history">×</button></div>
+    <button class="new-chat-button" id="newChatButton"><span>＋</span> New chat</button>
+    <div class="history-list" id="historyList"></div>
+    <div class="drawer-bottom"><button class="settings-row" id="drawerSettings"><span>⚙</span> Settings <span class="row-arrow">›</span></button><div class="privacy-note">Your conversations stay on this device.</div></div>
+  </aside>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="presentation">
+    <section class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <div class="modal-heading"><div><p class="eyebrow">PERSONALIZE YOUR AI</p><h2 id="settingsTitle">Settings</h2></div><button class="icon-button" id="closeSettings" aria-label="Close settings">×</button></div>
+      <label class="field-label" for="apiKey">OpenAI API key <span>optional</span></label>
+      <input id="apiKey" class="text-field" type="password" placeholder="sk-…" autocomplete="off" spellcheck="false">
+      <p class="field-help">Your key is saved only in this browser and sent directly to OpenAI. Never enter a key on a shared device.</p>
+      <label class="field-label" for="modelInput">Model</label>
+      <input id="modelInput" class="text-field" type="text" value="gpt-4o-mini" spellcheck="false">
+      <p class="field-help">Choose a model available to your API account. A fast model is selected by default.</p>
+      <div class="modal-actions"><button class="clear-key" id="clearKey">Remove key</button><button class="save-settings" id="saveSettings">Save settings</button></div>
+      <div class="demo-note"><strong>No API key?</strong> Skiny AI still works in demo mode with helpful sample replies. Add your own API key to get live AI answers.</div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
